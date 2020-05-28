@@ -3,6 +3,8 @@ package com.example.Sample;
 import com.data.Employee;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
-public class SampleApplication {
+public class SampleApplication extends SpringBootServletInitializer {
 
 	private static Map<String,Employee> employeeList = new HashMap<String, Employee>();
 
@@ -69,6 +71,11 @@ int count=1;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(SampleApplication.class, args);
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(SampleApplication.class);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
